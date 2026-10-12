@@ -2,7 +2,7 @@
 """Word 格式自动检查（用户规矩的验收脚本）—— 每次文档改完必跑
 规矩：中文=宋体、英文=Times New Roman；文章题目=二号(44)；正文=五号(21)+首行缩进2字符(420缇或firstLineChars=200)+两端对齐；
 标题=五号+加粗+顶格；图表内容与题注=小五(18)+居中+无缩进；图表下的注/Note行=小五+无缩进+左对齐；
-全文=单倍行距(line240, lineRule=auto)；公式=居中+编号手打顶右。
+全文=单倍行距(line240, lineRule=auto)；段前段后=0；公式=居中+编号手打顶右。
 
 用法：python word_format_check.py "文件.docx"    全绿=通过
 """
@@ -40,6 +40,10 @@ def check(path):
         issues.append('[行距] 非240: ' + m.group(0)[:70])
     for m in re.finditer(r'<w:spacing[^>]*w:lineRule="(?!auto)(\w+)"[^>]*/>', raw):
         issues.append('[行距] 非auto: ' + m.group(0)[:70])
+
+    # 3b) 段前段后应为 0
+    for m in re.finditer(r'<w:spacing[^>]*w:(?:before|after|beforeLines|afterLines)="(?!0")[^"]+"[^>]*/?>', raw):
+        issues.append('[段距] 段前/段后应为0: ' + m.group(0)[:70])
 
     # 4) 逐段检查（用路径做表格归属判断，稳定可靠）
     tbl_paths = set()

@@ -38,7 +38,7 @@ word-format-standard/
 │   ├── Word文档格式标准与核对流程.md      # 标准正文（Markdown 版，方便改）
 │   └── Word文档格式标准与核对流程.docx    # 排版好的样板（按标准排版，可直接看效果）
 └── tools/
-    ├── word_format_check.py              # 自动检查：字体/字号/行距/缩进/标题/题注/注行/表格/公式对象尺寸
+    ├── word_format_check.py              # 自动检查：字体/字号/行距/段距/缩进/标题/题注/注行/表格/公式对象尺寸
     ├── word_symbol_align_check.py        # 公式专项：导出 PDF 后逐字符测量符号与文字的位置差
     └── word_inline_eq_resize.py          # 公式修复：把行内 MathType 符号缩到与段落文字同字号
 ```
